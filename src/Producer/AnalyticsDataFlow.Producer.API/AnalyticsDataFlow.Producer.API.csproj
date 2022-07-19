@@ -8,4 +8,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AnalyticsDataFlow.Producer.Application\AnalyticsDataFlow.Producer.Application.csproj" />
+    <ProjectReference Include="..\AnalyticsDataFlow.Producer.Infrastructure\AnalyticsDataFlow.Producer.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

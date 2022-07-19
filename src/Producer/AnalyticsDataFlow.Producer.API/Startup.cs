@@ -1,3 +1,6 @@
+using AnalyticsDataFlow.Producer.Application.Interfaces;
+using AnalyticsDataFlow.Producer.Application.Services;
+using AnalyticsDataFlow.Producer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,8 @@ namespace AnalyticsDataFlow.Producer.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<ProducerService>();
+            services.AddScoped<IVendaRepository, VendaRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
