@@ -9,6 +9,12 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.Spark" Version="2.1.1" />
+    <PackageReference Include="RavenDB.Client" Version="5.4.1" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Producer\AnalyticsDataFlow.Producer.Application\AnalyticsDataFlow.Producer.Application.csproj" />
   </ItemGroup>
 
 </Project>
