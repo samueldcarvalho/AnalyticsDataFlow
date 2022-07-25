@@ -67,10 +67,10 @@ namespace AnalyticsDataFlow.Producer.Application.Services
                                 .GroupBy(g => g.Index / 1000)
                                 .Select(g => g.Select(x => x.Value));
 
-                            foreach (IEnumerable<Venda> pacote in pacotesVendas)
+                            foreach (Venda venda in vendas)
                             {
-                                var result = await prod.ProduceAsync("venda_topic", new Message<string, string>() { Key= $"{pacote.Min(v => v.Id)}{pacote.Max(v => v.Id)}", Value = JsonConvert.SerializeObject(pacote)});;
-                                Console.WriteLine($"Pacote [{pacote.Min(v => v.Id)}-{pacote.Max(v => v.Id)}] para '{result.TopicPartitionOffset}' | DataPacote: {new DateTime(2020, 11, 01).AddDays(_counter)}");
+                                var result = await prod.ProduceAsync("venda_topic", new Message<string, string>() { Key= venda.Id.ToString(), Value = JsonConvert.SerializeObject(venda)});;
+                                Console.WriteLine($"Pacote [{venda.Id}] para '{result.TopicPartitionOffset}' | DataPacote: {new DateTime(2020, 11, 01).AddDays(_counter)}");
                             }
                         }
 
