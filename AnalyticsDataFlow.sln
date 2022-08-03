@@ -15,13 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalyticsDataFlow.Producer.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalyticsDataFlow.Producer.API", "src\Producer\AnalyticsDataFlow.Producer.API\AnalyticsDataFlow.Producer.API.csproj", "{84E64932-EF84-404D-90EA-3F5D448C03FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsDataFlow.Consumer.API", "src\Consumer\AnalyticsDataFlow.Consumer.API\AnalyticsDataFlow.Consumer.API.csproj", "{58EF7359-29D7-4C21-8ACC-B9A853D0ACA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalyticsDataFlow.Consumer.API", "src\Consumer\AnalyticsDataFlow.Consumer.API\AnalyticsDataFlow.Consumer.API.csproj", "{58EF7359-29D7-4C21-8ACC-B9A853D0ACA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsDataFlow.Consumer.Application", "src\Consumer\AnalyticsDataFlow.Consumer.Application\AnalyticsDataFlow.Consumer.Application.csproj", "{C9EB8C6F-B859-4BF4-B389-9E4BAA158150}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalyticsDataFlow.Consumer.Application", "src\Consumer\AnalyticsDataFlow.Consumer.Application\AnalyticsDataFlow.Consumer.Application.csproj", "{C9EB8C6F-B859-4BF4-B389-9E4BAA158150}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{31DD77C0-2AF3-4027-81FA-4361CF9BA29C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyKafkaSparkApp", "src\Test\MyKafkaSparkApp\MyKafkaSparkApp.csproj", "{A7DE00C7-F789-419E-BA4E-8E6ECD711798}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyKafkaSparkApp", "src\Test\MyKafkaSparkApp\MyKafkaSparkApp.csproj", "{A7DE00C7-F789-419E-BA4E-8E6ECD711798}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ELK.Producer", "ELK.Producer", "{B9BEFCFD-66F0-4374-BCCB-C7AF6A119A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,7 @@ Global
 		{C9EB8C6F-B859-4BF4-B389-9E4BAA158150} = {5ED3ECE7-2AEC-4B2B-AA5F-128ABCE1DC68}
 		{31DD77C0-2AF3-4027-81FA-4361CF9BA29C} = {F81E8FE1-B978-436C-8926-9B249DA66D4D}
 		{A7DE00C7-F789-419E-BA4E-8E6ECD711798} = {31DD77C0-2AF3-4027-81FA-4361CF9BA29C}
+		{B9BEFCFD-66F0-4374-BCCB-C7AF6A119A76} = {F81E8FE1-B978-436C-8926-9B249DA66D4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14BE986C-D1C5-4F79-9BBF-93851DF769A3}
