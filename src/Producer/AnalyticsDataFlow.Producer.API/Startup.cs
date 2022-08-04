@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,14 @@ namespace AnalyticsDataFlow.Producer.API
         {
             services.AddHostedService<ProducerService>();
             services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IElasticClient>(injector => new ElasticClient(new ConnectionSettings()));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AnalyticsDataFlow.Producer.API", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
