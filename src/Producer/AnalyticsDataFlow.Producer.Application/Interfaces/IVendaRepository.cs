@@ -10,5 +10,7 @@ namespace AnalyticsDataFlow.Producer.Application.Interfaces
     public interface IVendaRepository
     {
         Task<IEnumerable<Venda>> ObterVendasPorDia(int diaIncremento, DateTime dataPrimeiroRegistro);
+        Task<IEnumerable<Produto>> ObterProdutos();
+        Task<IEnumerable<VendaDTO>> ObterVendasNoSql(int diaIncremento, DateTime dataPrimeiroRegistro);
     }
 }

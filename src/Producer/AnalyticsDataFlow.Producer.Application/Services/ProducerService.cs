@@ -24,7 +24,6 @@ namespace AnalyticsDataFlow.Producer.Application.Services
 
         private readonly string _brokerURL;
         private int _counter = 0;
-
         public ProducerService(IServiceProvider serviceProvider, IConfiguration configuration, ILogger<ProducerService> logger)
         {
             _brokerURL = configuration.GetSection("Kafka:ServerURL").Value;
@@ -49,25 +48,54 @@ namespace AnalyticsDataFlow.Producer.Application.Services
 
         private async Task Produce(CancellationToken cancellationToken)
         {
-            IEnumerable<Venda> vendas = await _vendaRepository.ObterVendasPorDia(_counter, new DateTime(2020, 11, 01));
+            //List<Produto> produtos = (await _vendaRepository.ObterProdutos()).ToList();
+            //produtos.ForEach(async p =>
+            //{
+            //    var json = JsonConvert.SerializeObject(p);
+            //    var content = new StringContent(json);
+            //    content.Headers.ContentType.MediaType = MediaTypeNames.Application.Json;
 
-            foreach (var venda in vendas)
+            //    try
+            //    {
+            //        var response = await _httpClient.PostAsync($"http://dev001.softwaredrogaria.com.br:9200/produtos/_doc/{p.Id}", content);
+            //        Console.WriteLine($"Sucesso! Produto {p.Id}" );
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.LogError(ex.Message);
+            //        return;
+            //    }
+            //});
+
+            while (!cancellationToken.IsCancellationRequested)
             {
-                var json = JsonConvert.SerializeObject(venda);
-                var content = new StringContent(json);
-                content.Headers.ContentType.MediaType = MediaTypeNames.Application.Json;
-                try
-                {
-                    var response = await _httpClient.PostAsync($"http://localhost:9200/vendas/_doc/{venda.Id}", content);
-                    Console.WriteLine($"Sucesso! Venda {venda.Id}" + _counter);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.Message);
-                }
-            }
+                IEnumerable<VendaDTO> vendas = await _vendaRepository.ObterVendasNoSql(_counter, new DateTime(2020, 11, 01));
 
-            _counter++;
+                var pacotesVendas = vendas
+                    .Select((venda, index) => new { Venda = venda, Index = index })
+                    .GroupBy(g => g.Index / 200).Select(g => g.Select(v => v.Venda)).ToList();
+
+                pacotesVendas.ForEach(async pacote => {
+                    foreach (var venda in pacote)
+                    {
+                        var json = JsonConvert.SerializeObject(venda);
+                        var content = new StringContent(json);
+                        content.Headers.ContentType.MediaType = MediaTypeNames.Application.Json;
+
+                        try
+                        {
+                            var response = await _httpClient.PostAsync($"http://dev001.softwaredrogaria.com.br:9200/vendas/_doc/{venda.VendaId}", content);
+                            Console.WriteLine($"Sucesso! Venda {venda.VendaId}" + _counter);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex.Message);
+                        }
+                    }
+                });
+
+                _counter++;
+            }
         }
     }
 }
